@@ -7,6 +7,7 @@ import { data } from "./mock/data";
 import { topicOption } from "./nodes/TopicNode";
 import { topicChildOption } from "./nodes/TopicChild";
 import { MindMapEdge } from "./nodes/MindEdge";
+import { createChildNode } from "./createChildNode";
 interface Props {
 
 }
@@ -21,17 +22,17 @@ export default class MindMap extends React.Component<Props, State> {
   componentWillMount() {
 
     insertCss(`
-  .topic-image {
-    visibility: hidden;
-    cursor: pointer;
-  }
-  .x6-node:hover .topic-image {
-    visibility: visible;
-  }
-  .x6-node-selected rect {
-    stroke-width: 2px;
-  }
-`)
+      .topic-image {
+        visibility: hidden;
+        cursor: pointer;
+      }
+      .x6-node:hover .topic-image {
+        visibility: visible;
+      }
+      .x6-node-selected rect {
+        stroke-width: 2px;
+      }
+    `)
     // 连接器
     Graph.registerConnector(
       'mindmap',
@@ -57,9 +58,6 @@ export default class MindMap extends React.Component<Props, State> {
 
     const graph = new Graph({
       container: this.graphContainer,
-      interacting: {
-        nodeMovable: true
-      },
       connecting: {
         connectionPoint: 'anchor',
       },
@@ -69,23 +67,26 @@ export default class MindMap extends React.Component<Props, State> {
       keyboard: {
         enabled: true,
       },
-    })
-    const target2 = graph.createNode({
-      x: 180,
-      y: 10,
-      width: 80,
-      height: 40,
-      label: "Child",
-      zIndex: 100,
-      attrs: {
-        body: {
-          fill: '#fff'
-        },
-        label: {
-          fill: "#c74783"
+      translating: {
+        restrict(view) {
+          const cell = view.cell
+          if (cell.isNode()) {
+            const parent = cell.getParent()
+            if (parent) {
+              return parent.getBBox()
+            }
+          }
+
+          return null
         }
-      }
-    });
+      },
+      interacting: function (cellView) {
+        if (cellView.cell.getData() != undefined && !cellView.cell.getData().disableMove) {
+          return { nodeMovable: false }
+        }
+        return true
+      },
+    })
     const render = () => {
       const result: HierarchyResult = Hierarchy.mindmap(data, {
         direction: 'H',
@@ -106,8 +107,6 @@ export default class MindMap extends React.Component<Props, State> {
         },
       })
       const cells: Cell[] = []
-      cells.push(target2)
-
       const traverse = (hierarchyItem: HierarchyResult) => {
 
 
@@ -123,11 +122,19 @@ export default class MindMap extends React.Component<Props, State> {
             height: data.height,
             label: data.label,
             type: data.type,
-            zIndex: 1
+            zIndex: 1,
           })
-
-          if (node.id == '1') node.addChild(target2)
           cells.push(node)
+          const childNode = createChildNode(graph, {
+            id: 'child' + data.id,
+            width: data.width,
+            x: hierarchyItem.x,
+            y: hierarchyItem.y,
+            height: 28,
+            label: data.label + 'child',
+          })
+          cells.push(childNode)
+          node.addChild(childNode)
           if (children) {
             children.forEach((item: HierarchyResult) => {
               const { id, data } = item

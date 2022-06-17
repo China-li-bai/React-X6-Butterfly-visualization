@@ -40,3 +40,48 @@ export const data: MindMapData = {
     },
   ],
 }
+
+export const objData = {
+  user: {
+    desc: {
+      type: 'OBJECT',
+      value: 'user',
+      required: true,
+      isParameter: true,
+      chineseName: '用户',
+      EnName: 'user',
+    },
+
+    param: {
+      desc: {
+        type: 'OBJECT',
+        value: 'param',
+        required: true,
+        isParameter: true,
+        chineseName: '命令参数',
+        EnName: 'parameter',
+      },
+      DeviceID: {
+        desc: {
+          type: 'STRING',
+          value: 'DeviceID',
+          required: true,
+          isParameter: true,
+          chineseName: '设备id',
+          EnName: 'DeviceID',
+        },
+      }
+    },
+    fc: {
+      desc: {
+        type: 'STRING',
+        value: 'fc',
+        required: true,
+        isParameter: true,
+        chineseName: '方法名',
+        EnName: 'fc',
+      },
+
+    }
+  }
+}
