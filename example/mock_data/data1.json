@@ -1,0 +1,475 @@
+{
+  "code": "00000",
+  "msg": "请求处理成功",
+  "timestamp": "1655192390927",
+  "result": {
+    "id": "1440877777166413824",
+    "name": "获取实时流静态URL地址",
+    "code": "VIDEO-GET-STATICURL-REAL",
+    "desc": "UWB_新增接口_视频预览功能",
+    "groupId": "1440875879889776640",
+    "groupName": "流媒体服务",
+    "inputParams": [
+      {
+        "id": "1440877777174802432",
+        "pid": null,
+        "name": "sid",
+        "code": "sid",
+        "codeAlias": "sid",
+        "desc": null,
+        "dataType": "STRING",
+        "isRequired": false,
+        "properties": {
+          "default": ""
+        },
+        "refScope": "bodyParams",
+        "refId": "633753023254",
+        "parentIsArray": false,
+        "children": []
+      },
+      {
+        "id": "1440877777174802433",
+        "pid": null,
+        "name": "设备ID",
+        "code": "DeviceID",
+        "codeAlias": "DeviceID",
+        "desc": null,
+        "dataType": "STRING",
+        "isRequired": true,
+        "properties": {
+          "default": ""
+        },
+        "refScope": "bodyParams",
+        "refId": "210945227584",
+        "parentIsArray": false,
+        "children": []
+      },
+      {
+        "id": "1440877777174802434",
+        "pid": null,
+        "name": "协议类型",
+        "code": "ProtocolType",
+        "codeAlias": "ProtocolType",
+        "desc": null,
+        "dataType": "INTEGER",
+        "isRequired": false,
+        "properties": {
+          "default": "2"
+        },
+        "refScope": "bodyParams",
+        "refId": "720124617814",
+        "parentIsArray": false,
+        "children": []
+      },
+      {
+        "id": "1440877777174802435",
+        "pid": null,
+        "name": "通道号",
+        "code": "Channel",
+        "codeAlias": "Channel",
+        "desc": null,
+        "dataType": "INTEGER",
+        "isRequired": true,
+        "properties": {
+          "default": ""
+        },
+        "refScope": "bodyParams",
+        "refId": "97859095476",
+        "parentIsArray": false,
+        "children": []
+      },
+      {
+        "id": "1440877777174802436",
+        "pid": null,
+        "name": "流类型",
+        "code": "StreamType",
+        "codeAlias": "StreamType",
+        "desc": null,
+        "dataType": "INTEGER",
+        "isRequired": true,
+        "properties": {
+          "default": ""
+        },
+        "refScope": "bodyParams",
+        "refId": "874367534419",
+        "parentIsArray": false,
+        "children": []
+      },
+      {
+        "id": "1440877777174802437",
+        "pid": null,
+        "name": "优先级",
+        "code": "Priority",
+        "codeAlias": "Priority",
+        "desc": null,
+        "dataType": "INTEGER",
+        "isRequired": false,
+        "properties": {
+          "default": ""
+        },
+        "refScope": "bodyParams",
+        "refId": "30094952060",
+        "parentIsArray": false,
+        "children": []
+      },
+      {
+        "id": "1440877777174802438",
+        "pid": null,
+        "name": "是否抢占",
+        "code": "Preempt",
+        "codeAlias": "Preempt",
+        "desc": null,
+        "dataType": "INTEGER",
+        "isRequired": false,
+        "properties": {
+          "default": "0"
+        },
+        "refScope": "bodyParams",
+        "refId": "315576497777",
+        "parentIsArray": false,
+        "children": []
+      },
+      {
+        "id": "1440877777174802439",
+        "pid": null,
+        "name": "码流封装格式",
+        "code": "Format",
+        "codeAlias": "Format",
+        "desc": null,
+        "dataType": "INTEGER",
+        "isRequired": false,
+        "properties": {
+          "default": "0"
+        },
+        "refScope": "bodyParams",
+        "refId": "720949165490",
+        "parentIsArray": false,
+        "children": []
+      }
+    ],
+    "outputParams": [
+      {
+        "id": "1440879336927408128",
+        "pid": null,
+        "name": "序号",
+        "code": "sn",
+        "desc": null,
+        "dataType": "STRING",
+        "properties": null,
+        "children": []
+      },
+      {
+        "id": "1440879336927408129",
+        "pid": null,
+        "name": "方法名",
+        "code": "fc",
+        "desc": null,
+        "dataType": "STRING",
+        "properties": null,
+        "children": []
+      },
+      {
+        "id": "1440879336927408130",
+        "pid": null,
+        "name": "是否应答",
+        "code": "ack",
+        "desc": null,
+        "dataType": "STRING",
+        "properties": null,
+        "children": []
+      },
+      {
+        "id": "1440879336927408131",
+        "pid": null,
+        "name": "sid",
+        "code": "sid",
+        "desc": null,
+        "dataType": "STRING",
+        "properties": null,
+        "children": []
+      },
+      {
+        "id": "1440879336927408132",
+        "pid": null,
+        "name": "命令参数",
+        "code": "param",
+        "desc": null,
+        "dataType": "OBJECT",
+        "properties": null,
+        "children": [
+          {
+            "id": "177038846148",
+            "pid": "1440879336927408132",
+            "name": "错误码",
+            "code": "error_code",
+            "desc": null,
+            "dataType": "NUMBER",
+            "properties": null,
+            "children": []
+          },
+          {
+            "id": "120277199635",
+            "pid": "1440879336927408132",
+            "name": "error_desc",
+            "code": "error_desc",
+            "desc": null,
+            "dataType": "STRING",
+            "properties": null,
+            "children": []
+          },
+          {
+            "id": "511195265349",
+            "pid": "1440879336927408132",
+            "name": "内网流播放地址",
+            "code": "stream_url",
+            "desc": null,
+            "dataType": "STRING",
+            "properties": null,
+            "children": []
+          },
+          {
+            "id": "991049215960",
+            "pid": "1440879336927408132",
+            "name": "外网流播放地址",
+            "code": "stream_external_url",
+            "desc": null,
+            "dataType": "STRING",
+            "properties": null,
+            "children": []
+          }
+        ]
+      }
+    ],
+    "driver": {
+      "code": "HTTP",
+      "method": "POST",
+      "addressType": "BUS_CFG",
+      "serverKey": "",
+      "address": "http://127.0.0.1:10200",
+      "busCfgKey": "HY-MMS-XLFW",
+      "uri": "/mms/xlfw",
+      "pathVariables": [],
+      "queryParams": [],
+      "bodyType": "JSON",
+      "bodyParams": [
+        {
+          "id": "8851930472",
+          "pid": null,
+          "name": "序号",
+          "code": "sn",
+          "codeAlias": null,
+          "desc": null,
+          "dataType": "STRING",
+          "isRequired": null,
+          "properties": {
+            "default": "1"
+          },
+          "refScope": null,
+          "refId": null,
+          "parentIsArray": null,
+          "children": []
+        },
+        {
+          "id": "41398435863",
+          "pid": null,
+          "name": "是否应答",
+          "code": "ack",
+          "codeAlias": null,
+          "desc": null,
+          "dataType": "STRING",
+          "isRequired": null,
+          "properties": {
+            "default": "0"
+          },
+          "refScope": null,
+          "refId": null,
+          "parentIsArray": null,
+          "children": []
+        },
+        {
+          "id": "27031189861",
+          "pid": null,
+          "name": "方法名",
+          "code": "fc",
+          "codeAlias": null,
+          "desc": null,
+          "dataType": "STRING",
+          "isRequired": null,
+          "properties": {
+            "default": "AVFC_XL_GET_LIVE_STREAM_STATIC_URL"
+          },
+          "refScope": null,
+          "refId": null,
+          "parentIsArray": null,
+          "children": []
+        },
+        {
+          "id": "633753023254",
+          "pid": null,
+          "name": "sid",
+          "code": "sid",
+          "codeAlias": null,
+          "desc": null,
+          "dataType": "STRING",
+          "isRequired": null,
+          "properties": {
+            "default": ""
+          },
+          "refScope": null,
+          "refId": null,
+          "parentIsArray": null,
+          "children": []
+        },
+        {
+          "id": "639530066136",
+          "pid": null,
+          "name": "命令参数",
+          "code": "param",
+          "codeAlias": null,
+          "desc": null,
+          "dataType": "OBJECT",
+          "isRequired": null,
+          "properties": {
+            "default": ""
+          },
+          "refScope": null,
+          "refId": null,
+          "parentIsArray": null,
+          "children": [
+            {
+              "id": "210945227584",
+              "pid": null,
+              "name": "设备ID",
+              "code": "DeviceID",
+              "codeAlias": null,
+              "desc": null,
+              "dataType": "STRING",
+              "isRequired": null,
+              "properties": {
+                "default": ""
+              },
+              "refScope": null,
+              "refId": null,
+              "parentIsArray": null,
+              "children": []
+            },
+            {
+              "id": "720124617814",
+              "pid": null,
+              "name": "协议类型",
+              "code": "ProtocolType",
+              "codeAlias": null,
+              "desc": null,
+              "dataType": "INTEGER",
+              "isRequired": null,
+              "properties": {
+                "default": "2"
+              },
+              "refScope": null,
+              "refId": null,
+              "parentIsArray": null,
+              "children": []
+            },
+            {
+              "id": "97859095476",
+              "pid": null,
+              "name": "通道号",
+              "code": "Channel",
+              "codeAlias": null,
+              "desc": null,
+              "dataType": "INTEGER",
+              "isRequired": null,
+              "properties": {
+                "default": ""
+              },
+              "refScope": null,
+              "refId": null,
+              "parentIsArray": null,
+              "children": []
+            },
+            {
+              "id": "874367534419",
+              "pid": null,
+              "name": "流类型",
+              "code": "StreamType",
+              "codeAlias": null,
+              "desc": null,
+              "dataType": "INTEGER",
+              "isRequired": null,
+              "properties": {
+                "default": ""
+              },
+              "refScope": null,
+              "refId": null,
+              "parentIsArray": null,
+              "children": []
+            },
+            {
+              "id": "30094952060",
+              "pid": null,
+              "name": "优先级",
+              "code": "Priority",
+              "codeAlias": null,
+              "desc": null,
+              "dataType": "INTEGER",
+              "isRequired": null,
+              "properties": {
+                "default": ""
+              },
+              "refScope": null,
+              "refId": null,
+              "parentIsArray": null,
+              "children": []
+            },
+            {
+              "id": "315576497777",
+              "pid": null,
+              "name": "是否抢占",
+              "code": "Preempt",
+              "codeAlias": null,
+              "desc": null,
+              "dataType": "INTEGER",
+              "isRequired": null,
+              "properties": {
+                "default": "0"
+              },
+              "refScope": null,
+              "refId": null,
+              "parentIsArray": null,
+              "children": []
+            },
+            {
+              "id": "720949165490",
+              "pid": null,
+              "name": "码流封装格式",
+              "code": "Format",
+              "codeAlias": null,
+              "desc": null,
+              "dataType": "INTEGER",
+              "isRequired": null,
+              "properties": {
+                "default": "0"
+              },
+              "refScope": null,
+              "refId": null,
+              "parentIsArray": null,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "headerParams": [],
+      "topic": null,
+      "partition": null,
+      "messageParams": [],
+      "properties": {}
+    },
+    "engine": {
+      "threadLimit": null,
+      "format": null,
+      "properties": null
+    },
+    "createdBy": null,
+    "modifiedBy": null
+  }
+}
