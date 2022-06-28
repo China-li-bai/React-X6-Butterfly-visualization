@@ -8,7 +8,7 @@ export const MindMapEdge = {
   attrs: {
     line: {
       targetMarker: '',
-      stroke: '#A2B1C3',
+      stroke: '#485a74',
       strokeWidth: 2,
     },
   },

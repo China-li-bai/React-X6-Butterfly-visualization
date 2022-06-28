@@ -9,6 +9,7 @@ import 'antd/dist/antd.css';
 import './index.less';
 import MainMap from './components/MainMap/MainMap';
 import MindMap from './components/MindMap'
+import JsonMap from './JsonMap'
 const { Header } = Layout;
 
 
@@ -19,7 +20,7 @@ ReactDOM.render((
     <Layout>
       <Header className='header'>DTDesign-React可视化建模组件</Header>
       <Layout>
-        {/* <MainMap /> */}<MindMap />
+        {/* <MainMap /> */}<JsonMap />
         {/* <JqCom /> */}
         {/* <ReactSample /> */}
       </Layout>

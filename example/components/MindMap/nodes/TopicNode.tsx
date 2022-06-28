@@ -20,8 +20,8 @@ export const topicOption = {
     body: {
       rx: 6,
       ry: 6,
-      stroke: '#5F95FF',
-      fill: '#EFF4FF',
+      stroke: '#485a74',
+      fill: '#1e1e1e',
       strokeWidth: 1,
     },
     img: {
@@ -38,7 +38,7 @@ export const topicOption = {
     },
     label: {
       fontSize: 14,
-      fill: '#262626',
+      fill: '#ca8b22',
     },
   },
 }
