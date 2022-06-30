@@ -10,6 +10,7 @@ import './index.less';
 import MainMap from './components/MainMap/MainMap';
 import MindMap from './components/MindMap'
 import JsonMap from './JsonMap'
+import ExamplePrint from './example-print/examples/index'
 const { Header } = Layout;
 
 
@@ -20,7 +21,9 @@ ReactDOM.render((
     <Layout>
       <Header className='header'>DTDesign-React可视化建模组件</Header>
       <Layout>
-        {/* <MainMap /> */}<JsonMap />
+        {/* <ExamplePrint /> */}
+        {/* <MainMap /> */}
+        <JsonMap />
         {/* <JqCom /> */}
         {/* <ReactSample /> */}
       </Layout>
