@@ -10,6 +10,7 @@
   "author": "jambin",
   "license": "MIT",
   "dependencies": {
+    "@antv/x6-react-components": "^1.1.15",
     "antd": "~4.10.3",
     "butterfly-react": "^1.0.0",
     "insert-css": "^2.0.0",

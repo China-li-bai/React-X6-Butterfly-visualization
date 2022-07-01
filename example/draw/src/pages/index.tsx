@@ -1,108 +1,24 @@
-import { Cell, Graph, Path, Node } from "@antv/x6";
-import React, { useEffect, useRef, useState } from 'react';
-import Hierarchy from '@antv/hierarchy'
-import insertCss from 'insert-css'
-import { HierarchyResult, MindMapData } from "./interface";
-import { data, objData } from "./mock/data";
-import { topicOption } from "./nodes/topicOption";
-import { topicChildOption } from "./nodes/topicChildOption";
-import { MapEdgeOption } from "./nodes/MapEdgeOption";
-import { createChildNode } from "./utils/createChildNode";
-import disposalInterfaceData from "./utils/disposalInterfaceData";
-import { parser } from "./utils/jsonEditorParse";
-import { getEdgeNodes, Obj2Str, renderText, toString } from "./utils/helpers";
-import hierarchyLayout from "./utils/HierarchyLayout";
-import { nodeConfig } from "./config";
-import { addChildNode, removeNode } from "./utils/sortingData";
-import { useConfig } from "../../JsonMap/reducer";
-import './nodes/shape'
+import React, { useState, useEffect } from 'react'
+import FlowGraph from './Graph'
+import ToolBar from './components/ToolBar'
+import '../reset.less'
+import '../global.css'
+import './index.less'
+import { Cell } from '@antv/x6'
+import { HierarchyResult } from '../../../components/MindMap/interface'
+import { renderText } from '../../../components/MindMap/utils/helpers'
+import { createChildNode } from '../../../components/MindMap/utils/createChildNode'
+import { nodeConfig } from '../../../components/MindMap/config'
+import hierarchyLayout from '../../../components/MindMap/utils/HierarchyLayout'
+import { useConfig } from '../../../JsonMap/reducer'
+import { parser } from '../../../components/MindMap/utils/jsonEditorParse'
 
-export const MindMap = () => {
-  const { json, dispatch } = useConfig()
-  const refContainer = useRef(null)
+const Draw = (props) => {
+  const { isShowMinMap = false } = props
   const [graph, setGraph] = useState(null)
+  const [isReady, setIsReady] = useState(false)
+  const { json, dispatch } = useConfig()
   const { mappedElements } = parser(json)
-
-  insertCss(`
-      .topic-image {
-        visibility: hidden;
-        cursor: pointer;
-      }
-      .x6-node:hover .topic-image {
-        visibility: visible;
-      }
-      .x6-node-selected rect {
-        stroke-width: 2px;
-      }
-    `)
-  // 连接器
-  Graph.registerConnector(
-    'mindmap',
-    (sourcePoint, targetPoint, routerPoints, options) => {
-      const midX = sourcePoint.x + 10
-      const midY = sourcePoint.y
-      const ctrX = (targetPoint.x - midX) / 5 + midX
-      const ctrY = targetPoint.y
-      const pathData = `
-     M ${sourcePoint.x} ${sourcePoint.y}
-     L ${midX} ${midY}
-     Q ${ctrX} ${ctrY} ${targetPoint.x} ${targetPoint.y}
-    `
-      return options.raw ? Path.parse(pathData) : pathData
-    },
-    true,
-  )
-  Graph.registerNode('topic', topicOption, true)
-  Graph.registerNode('topic-child', topicChildOption, true)
-  Graph.registerEdge('mindmap-edge', MapEdgeOption, true)
-  useEffect(() => {
-    const graph = new Graph({
-      container: refContainer.current,
-      connecting: {
-        connectionPoint: 'anchor',
-      },
-      selecting: {
-        enabled: true,
-      },
-      keyboard: {
-        enabled: true,
-      },
-      // 控制画布整体平移
-      panning: {
-        enabled: true,
-        eventTypes: ['leftMouseDown'],
-      },
-      // 限制子节点时触发，只能在父节点移动
-      translating: {
-        restrict(view) {
-          const cell = view.cell
-          if (cell.isNode()) {
-            const parent = cell.getParent()
-            if (parent) {
-              return parent.getBBox()
-            }
-          }
-
-          return null
-        }
-      },
-      mousewheel: {
-        enabled: true,
-        modifiers: ['ctrl', 'meta'],
-      },
-      // // 设置带有nodeMovable的节点不可拖动
-      // interacting: function (cellView) {
-      //   if (cellView.cell.getData() != undefined && !cellView.cell.getData().disableMove) {
-      //     return { nodeMovable: false }
-      //   }
-      //   return true
-      // },
-      interacting: {
-        nodeMovable: false
-      }
-    })
-    setGraph(graph)
-  }, [])
   const renderJSON = (graph) => {
     const cells: Cell[] = []
     const traverse = (hierarchyItem: HierarchyResult) => {
@@ -219,21 +135,43 @@ export const MindMap = () => {
     console.log("🚀 - file: index.tsx - line 163 - cells", els, cells, mappedElements)
     graph.centerContent()//将画布内容中心与视口中心对齐
   }
+  const getContainerSize = () => {
+    return {
+      width: document.body.offsetWidth - 214,
+      height: document.body.offsetHeight - 105,
+    }
+  }
+
   useEffect(() => {
+    const graph = FlowGraph.init()
+    setGraph(graph)
+    setIsReady(() => true)
+    const resizeFn = () => {
+      const { width, height } = getContainerSize()
+      graph.resize(width, height)
+    }
+    resizeFn()
+    renderJSON(graph)
+    window.addEventListener('resize', resizeFn)
 
-    const time = setTimeout(() => {
-      renderJSON(graph)
-    }, 500);
-    // return clearTimeout(time)
-  }, [json])
-  return (<div
-    style={{
-      width: '100%',
-      height: 'calc(100vh - 36px)',
-      position: 'relative'
-    }}>
-    <div style={{ height: 'calc(100vh - 36px)', }} ref={refContainer}></div>
-  </div>
+    return () => {
+      window.removeEventListener('resize', resizeFn)
+    }
+  }, [])
+  useEffect(() => {
+    console.log("🚀 - file: index.tsx - line 163 - isReady", isReady)
+
+    if (isReady) renderJSON(graph)
+  }, [json, isReady])
+  return (
+    <div className={'wrap'}>
+      <div className={'toolbar'}>{isReady && <ToolBar />}</div>
+      <div className={'content'}>
+        {/* <div id="stencil" className={'shapes'}></div> */}
+        <div id="container" className="x6-graph" />
+        {isShowMinMap ? <div id="minimap" className={'minimap'}></div> : null}
+      </div>
+    </div>
   )
-
 }
+export default Draw

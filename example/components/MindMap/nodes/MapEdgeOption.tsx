@@ -1,6 +1,6 @@
 
 // 边
-export const MindMapEdge = {
+export const MapEdgeOption = {
   inherit: 'edge',
   connector: {
     name: 'mindmap',

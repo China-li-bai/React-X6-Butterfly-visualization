@@ -23,7 +23,6 @@ const editorOptions = {
   },
 };
 
-
 export const JsonEditor: React.FC = () => {
   const { json, dispatch } = useConfig()
   console.log("🚀 - file: index.tsx - line 30 - json", json)
@@ -31,7 +30,6 @@ export const JsonEditor: React.FC = () => {
   React.useEffect(() => {
     try {
       setValue(JSON.stringify(JSON.parse(json), null, 2));
-
     } catch (error) {
       console.log('error-36', error);
     }
@@ -42,17 +40,15 @@ export const JsonEditor: React.FC = () => {
         if (!value) {
           return dispatch({ type: ConfigActionType.SET_JSON, payload: "[]" });
         }
-
         // parseJson(value);
         dispatch({ type: ConfigActionType.SET_JSON, payload: value });
       } catch (jsonError: any) {
         console.log("🚀 - jsonError", jsonError)
-
       }
     }, 1500);
 
     return () => clearTimeout(formatTimer);
-  }, [value]);
+  }, [value, dispatch]);
 
   return (
     <div>

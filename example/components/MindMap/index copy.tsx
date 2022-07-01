@@ -4,9 +4,9 @@ import Hierarchy from '@antv/hierarchy'
 import insertCss from 'insert-css'
 import { HierarchyResult, MindMapData } from "./interface";
 import { data, objData } from "./mock/data";
-import { topicOption } from "./nodes/TopicNode";
-import { topicChildOption } from "./nodes/TopicChild";
-import { MindMapEdge } from "./nodes/MindEdge";
+import { topicOption } from "./nodes/topicOption";
+import { topicChildOption } from "./nodes/topicChildOption";
+import { MapEdgeOption } from "./nodes/MapEdgeOption";
 import { createChildNode } from "./utils/createChildNode";
 import disposalInterfaceData from "./utils/disposalInterfaceData";
 import { parser } from "./utils/jsonEditorParse";
@@ -58,7 +58,7 @@ export default class MindMap extends React.Component<Props, State> {
     )
     Graph.registerNode('topic', topicOption, true)
     Graph.registerNode('topic-child', topicChildOption, true)
-    Graph.registerEdge('mindmap-edge', MindMapEdge, true)
+    Graph.registerEdge('mindmap-edge', MapEdgeOption, true)
   }
   componentDidMount() {
 

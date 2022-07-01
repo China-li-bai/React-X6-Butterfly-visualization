@@ -11,9 +11,11 @@ import MainMap from './components/MainMap/MainMap';
 import MindMap from './components/MindMap'
 import JsonMap from './JsonMap'
 import ExamplePrint from './example-print/examples/index'
+import Draw from '../example/draw/src/pages'
+import { JsonEditor } from './components/JsonEditor';
 const { Header } = Layout;
 
-
+import { Map, SplitLayoutBox } from './components/X6Map/index'
 
 
 ReactDOM.render((
@@ -23,9 +25,12 @@ ReactDOM.render((
       <Layout>
         {/* <ExamplePrint /> */}
         {/* <MainMap /> */}
-        <JsonMap />
+        {/* <JsonMap /> */}
         {/* <JqCom /> */}
         {/* <ReactSample /> */}
+        {/* <Draw /> */}
+        {/* <Map /> */}
+        <SplitLayoutBox firstChildren={<JsonEditor />} primary={'second'} secondChildren={<Draw />} />
       </Layout>
     </Layout>
   </Router>
